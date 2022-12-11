@@ -21,9 +21,9 @@ public class FacultyService {
         this.facultiesRepository = facultiesRepository;
     }
 
-    public ResponseEntity<Faculty> findByUniversityIdAndName(Long universityId, String name) {
+    public ResponseEntity<Faculty> findByUniversityIdAndShortName(Long universityId, String shortName) {
         try {
-            Optional<Faculty> optionalFaculty = facultiesRepository.findByUniversityIdAndName(universityId, name);
+            Optional<Faculty> optionalFaculty = facultiesRepository.findByUniversityIdAndShortName(universityId, shortName);
             return optionalFaculty.map(faculty -> new ResponseEntity<>(faculty, HttpStatus.OK)).
                     orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }

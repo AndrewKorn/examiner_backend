@@ -17,10 +17,10 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_id")
     private Long id;
-
-    @Column(name = "subject_name")
-    private String subjectName;
-
+    @Column(name = "subject_full_name")
+    private String fullName;
+    @Column(name = "subject_short_name")
+    private String shortName;
     @Column(name = "faculty_id")
     private Long facultyId;
     private int course;

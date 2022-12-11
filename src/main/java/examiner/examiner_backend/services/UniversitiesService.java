@@ -33,9 +33,9 @@ public class UniversitiesService {
         }
     }
 
-    public ResponseEntity<University> findByName(String name) {
+    public ResponseEntity<University> findByShortName(String shortName) {
         try {
-            Optional<University> optionalUniversity = universitiesRepository.findByName(name);
+            Optional<University> optionalUniversity = universitiesRepository.findByShortName(shortName);
             return optionalUniversity.map(university -> new ResponseEntity<>(university, HttpStatus.OK)).
                     orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }

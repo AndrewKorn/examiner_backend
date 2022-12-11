@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectsService {
@@ -29,6 +30,25 @@ public class SubjectsService {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(subjects, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Subject> findByFacultyIdAndCourseAndSemesterAndShortName(
+            Long facultyId,
+            int course,
+            int semester,
+            String shortName
+    ) {
+        try {
+            Optional<Subject> optionalSubject = subjectsRepository.findByFacultyIdAndCourseAndSemesterAndShortName(
+                    facultyId, course, semester, shortName
+            );
+            return optionalSubject.map(s -> new ResponseEntity<>(s, HttpStatus.OK)).
+                    orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
         catch (Exception e) {
             e.printStackTrace();

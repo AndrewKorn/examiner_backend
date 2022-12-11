@@ -17,8 +17,10 @@ public class Faculty {
     @Column(name = "faculty_id")
     private Long id;
 
-    @Column(name = "faculty_name")
-    private String name;
+    @Column(name = "faculty_full_name")
+    private String fullName;
+    @Column(name = "faculty_short_name")
+    private String shortName;
 
     @Column(name = "university_id")
     private Long universityId;

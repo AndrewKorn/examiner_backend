@@ -23,10 +23,10 @@ public class FacultiesController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping("/{universityName}/faculties")
-    public ResponseEntity<List<Faculty>> getFacultiesByUniversityName(@PathVariable String universityName) {
+    @GetMapping("/{universityShortName}/faculties")
+    public ResponseEntity<List<Faculty>> getFacultiesByUniversityName(@PathVariable String universityShortName) {
         try {
-            University university = universitiesService.findByName(universityName).getBody();
+            University university = universitiesService.findByShortName(universityShortName).getBody();
             if (university == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

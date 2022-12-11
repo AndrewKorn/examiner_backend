@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 public class SubjectsController {
-
     private final UniversitiesService universitiesService;
     private final FacultyService facultyService;
     private final SubjectsService subjectsService;
@@ -27,16 +26,16 @@ public class SubjectsController {
         this.subjectsService = subjectsService;
     }
 
-    @GetMapping("/{universityName}/{facultyName}/{course}/{semester}/subjects")
+    @GetMapping("/{universityShortName}/{facultyShortName}/{course}/{semester}/subjects")
     public ResponseEntity<List<Subject>> getSubjects(
-            @PathVariable String universityName,
-            @PathVariable String facultyName,
+            @PathVariable String universityShortName,
+            @PathVariable String facultyShortName,
             @PathVariable int course,
             @PathVariable int semester
     ) {
-        University university = universitiesService.findByName(universityName).getBody();
+        University university = universitiesService.findByShortName(universityShortName).getBody();
         if (university != null) {
-            Faculty faculty = facultyService.findByUniversityIdAndName(university.getId(), facultyName).getBody();
+            Faculty faculty = facultyService.findByUniversityIdAndShortName(university.getId(), facultyShortName).getBody();
             if (faculty != null) {
                 return subjectsService.findAllByFacultyIdAndCourseAndSemester(faculty.getId(), course, semester);
             }
